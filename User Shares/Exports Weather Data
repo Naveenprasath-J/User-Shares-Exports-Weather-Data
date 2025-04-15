@@ -1,0 +1,21 @@
+import java.io.*;
+import java.util.*;
+
+public class WeatherDataExport {
+    public static void main(String[] args) throws IOException {
+        List<String[]> weatherData = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader("weather_data.csv"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            weatherData.add(line.split(","));
+        }
+        reader.close();
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter("exported_weather_data.csv"));
+        for (String[] data : weatherData) {
+            writer.write(String.join(",", data));
+            writer.newLine();
+        }
+        writer.close();
+    }
+}
